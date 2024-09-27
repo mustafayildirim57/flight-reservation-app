@@ -1,0 +1,20 @@
+<h2>Uçuş Filtrele</h2>
+<form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+  <label for="departureCity">Kalkış Yeri:</label>
+  <input type="text" formControlName="departureCity" placeholder="Kalkış yerini girin" />
+
+  <label for="arrivalCity">Varış Yeri:</label>
+  <input type="text" formControlName="arrivalCity" placeholder="Varış yerini girin" />
+
+  <label for="flightDate">Tarih:</label>
+  <input type="date" formControlName="flightDate" />
+
+  <button type="submit">Filtrele</button>
+</form>
+
+<h2>Filtrelenmiş Uçuşlar</h2>
+<ul>
+  <li *ngFor="let flight of flights">
+    {{ flight.departureCity }} - {{ flight.arrivalCity }} ({{ flight.flightDate }}) - {{ flight.price }} USD
+  </li>
+</ul>

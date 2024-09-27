@@ -1,0 +1,74 @@
+<div class="loginCenter">
+    <mat-card class="matCardSize">
+      <mat-card-header>
+        <mat-card-title style="font-size: xx-large;">Yeni Uçuş Oluştur</mat-card-title>
+      </mat-card-header>
+      <br>
+      <mat-card-content>
+        <form [formGroup]="flightForm"  (ngSubmit)="createFlight()" class="d-flex flex-column">
+          <!-- İlk Satır: Kalkış Yeri ve Varış Yeri -->
+          <div class="inputRow">
+            <mat-form-field class="custom-background" appearance="outline">
+              <mat-label>Kalkış Yeri</mat-label>
+              <input matInput formControlName="departureCity" placeholder="İstanbul">
+              <mat-error *ngIf="flightForm.get('departureCity')?.hasError('required')">
+                Kalkış yeri zorunludur.
+              </mat-error>
+            </mat-form-field>
+  
+            <mat-form-field class="custom-background" appearance="outline">
+              <mat-label>Varış Yeri</mat-label>
+              <input matInput formControlName="arrivalCity" placeholder="Berlin">
+              <mat-error *ngIf="flightForm.get('arrivalCity')?.hasError('required')">
+                Varış yeri zorunludur.
+              </mat-error>
+            </mat-form-field>
+          </div>
+  
+          <!-- İkinci Satır: Kalkış Tarihi ve Kalkış Saati -->
+          <div class="inputRow">
+            <mat-form-field class="custom-background" appearance="outline">
+              <mat-label>Kalkış Tarihi</mat-label>
+              <input matInput formControlName="flightDate" type="date">
+              <mat-error *ngIf="flightForm.get('flightDate')?.hasError('required')">
+                Kalkış tarihi zorunludur.
+              </mat-error>
+            </mat-form-field>
+  
+            <mat-form-field class="custom-background" appearance="outline">
+              <mat-label>Kalkış Saati</mat-label>
+              <input matInput formControlName="flightTime" type="time">
+              <mat-error *ngIf="flightForm.get('flightTime')?.hasError('required')">
+                Kalkış saati zorunludur.
+              </mat-error>
+            </mat-form-field>
+          </div>
+  
+          <!-- Üçüncü Satır: Kapasite ve Ücret -->
+          <div class="inputRow">
+            <mat-form-field class="custom-background" appearance="outline">
+              <mat-label>Kapasite</mat-label>
+              <input matInput formControlName="capacity" type="number" placeholder="150">
+              <mat-error *ngIf="flightForm.get('capacity')?.hasError('required')">
+                Kapasite zorunludur.
+              </mat-error>
+            </mat-form-field>
+  
+            <mat-form-field class="custom-background" appearance="outline">
+              <mat-label>Ücret</mat-label>
+              <input matInput formControlName="price" type="number" placeholder="299.99">
+              <mat-error *ngIf="flightForm.get('price')?.hasError('required')">
+                Ücret zorunludur.
+              </mat-error>
+            </mat-form-field>
+          </div>
+  
+          <!-- Butonlar -->
+          <div class="loginFootbar">
+            <button mat-raised-button color="primary" type="submit" [disabled]="flightForm.invalid">Uçuş Oluştur</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

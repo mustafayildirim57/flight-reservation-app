@@ -1,0 +1,27 @@
+.registerCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.matCardSize {
+    min-width: 40%;
+    padding: 20px;
+}
+
+.inputRow {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.inputRow mat-form-field {
+    width: 48%;
+}
+
+.registerFootbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+}

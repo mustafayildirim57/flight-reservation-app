@@ -1,0 +1,20 @@
+<mat-card>
+    <mat-card-title>Giriş Yap</mat-card-title>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <mat-form-field appearance="outline">
+        <mat-label>E-posta</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="example@example.com">
+        <mat-error *ngIf="loginForm.get('email')?.hasError('required')">E-posta zorunludur.</mat-error>
+        <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Geçerli bir e-posta giriniz.</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Şifre</mat-label>
+        <input matInput formControlName="password" type="password">
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Şifre zorunludur.</mat-error>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Giriş Yap</button>
+    </form>
+  </mat-card>
+  

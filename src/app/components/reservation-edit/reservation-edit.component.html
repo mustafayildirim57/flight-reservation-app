@@ -1,0 +1,49 @@
+<div class="reservationCenter">
+  <mat-card class="matCardSize">
+    <mat-card-header>
+      <mat-card-title style="font-size: xx-large;">Rezervasyon Düzenle</mat-card-title>
+    </mat-card-header>
+    <br>
+    <mat-card-content>
+      <form [formGroup]="reservationForm" (ngSubmit)="updateReservation()" class="d-flex flex-column">
+
+        <!-- İlk Satır: Uçuş Bilgisi ve Kullanıcı Adı -->
+        <div class="inputRow">
+          <mat-form-field class="custom-background" appearance="outline">
+            <mat-label>Uçuş Bilgisi</mat-label>
+            <input matInput formControlName="flightInfo" placeholder="Kalkış Yeri - Varış Yeri" [disabled]="true">
+          </mat-form-field>
+
+          <mat-form-field class="custom-background" appearance="outline">
+            <mat-label>Kullanıcı Adı</mat-label>
+            <input matInput formControlName="userName" placeholder="Ad Soyad" [disabled]="true">
+          </mat-form-field>
+        </div>
+
+        <!-- İkinci Satır: Koltuk Sayısı ve Rezervasyon Tarihi -->
+        <div class="inputRow">
+          <mat-form-field class="custom-background" appearance="outline">
+            <mat-label>Koltuk Sayısı</mat-label>
+            <input matInput formControlName="numberOfSeats" type="number" placeholder="Koltuk Sayısı">
+            <mat-error *ngIf="reservationForm.get('numberOfSeats')?.hasError('required')">
+              Koltuk sayısı zorunludur.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="custom-background" appearance="outline">
+            <mat-label>Rezervasyon Tarihi</mat-label>
+            <input matInput formControlName="reservationDate" type="date">
+            <mat-error *ngIf="reservationForm.get('reservationDate')?.hasError('required')">
+              Rezervasyon tarihi zorunludur.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Butonlar -->
+        <div class="loginFootbar">
+          <button mat-raised-button color="primary" type="submit" [disabled]="reservationForm.invalid">Rezervasyonu Güncelle</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

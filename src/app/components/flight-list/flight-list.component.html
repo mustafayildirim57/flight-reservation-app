@@ -1,0 +1,97 @@
+<mat-card>
+    <mat-card-title>Uçuşlar</mat-card-title>
+
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <form [formGroup]="filterForm" (ngSubmit)="applyFilter()" style="display: flex;">
+            <mat-form-field appearance="fill" style="margin-right: 8px;">
+                <mat-label>Kalkış Yeri</mat-label>
+                <input matInput formControlName="departureCity" placeholder="İstanbul">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="margin-right: 8px;">
+                <mat-label>Varış Yeri</mat-label>
+                <input matInput formControlName="arrivalCity" placeholder="Berlin">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="margin-right: 8px;">
+                <mat-label>Kalkış Tarihi</mat-label>
+                <input matInput formControlName="flightDate" type="date">
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit" style="margin-right: 8px;">Filtrele</button>
+            <button mat-raised-button color="primary" routerLink="/create-flight" *ngIf="isAdmin">Uçuş Ekle</button>
+        </form>
+    </div>
+
+    <div *ngIf="flights.data.length === 0">
+        <p>Şu anda mevcut bir uçuş bulunmamaktadır.</p>
+    </div>
+
+    <!-- Uçuşları listeleme tablosu -->
+    <table mat-table [dataSource]="flights" matSort class="mat-elevation-z8" *ngIf="flights.data.length > 0">
+
+        <!-- Seçim Radio Butonu -->
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef> Seç </th>
+            <td mat-cell *matCellDef="let flight">
+                <mat-radio-button [value]="flight.id" (change)="onFlightSelect(flight.id)"></mat-radio-button>
+            </td>
+        </ng-container>
+
+        <!-- Kalkış Yeri -->
+        <ng-container matColumnDef="departureCity">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Kalkış Yeri </th>
+            <td mat-cell *matCellDef="let flight"> {{ flight.departureCity }} </td>
+        </ng-container>
+
+        <!-- Varış Yeri -->
+        <ng-container matColumnDef="arrivalCity">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Varış Yeri </th>
+            <td mat-cell *matCellDef="let flight"> {{ flight.arrivalCity }} </td>
+        </ng-container>
+
+        <!-- Kalkış Tarihi -->
+        <ng-container matColumnDef="flightDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Kalkış Tarihi </th>
+            <td mat-cell *matCellDef="let flight"> {{ flight.flightDate | date:'dd.MM.yyyy' }} </td>
+        </ng-container>
+
+        <!-- Kalkış Saati -->
+        <ng-container matColumnDef="flightTime">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Kalkış Saati </th>
+            <td mat-cell *matCellDef="let flight"> {{ flight.flightTime }} </td>
+        </ng-container>
+
+        <!-- Koltuk Kapasitesi -->
+        <ng-container matColumnDef="capacity">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Kapasite </th>
+            <td mat-cell *matCellDef="let flight"> {{ flight.capacity }} </td>
+        </ng-container>
+
+        <!-- Ücret -->
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ücret </th>
+            <td mat-cell *matCellDef="let flight"> {{ flight.price | currency:'TRY':'symbol':'1.2-2' }} </td>
+        </ng-container>
+
+        <!-- Silme İşlevi -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> İşlemler </th>
+            <td mat-cell *matCellDef="let flight">
+                <button mat-raised-button color="warn" (click)="deleteFlight(flight.id)" *ngIf="isAdmin">Sil</button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row
+            *matHeaderRowDef="['select', 'departureCity', 'arrivalCity', 'flightDate', 'flightTime', 'capacity', 'price', 'actions']">
+        </tr>
+        <tr mat-row
+            *matRowDef="let row; columns: ['select', 'departureCity', 'arrivalCity', 'flightDate', 'flightTime', 'capacity', 'price', 'actions'];">
+        </tr>
+    </table>
+
+    <!-- Devam Butonu -->
+    <div style="text-align: right; margin-top: 16px;">
+        <button mat-raised-button color="accent" *ngIf="selectedFlightId" (click)="continueReservation()">Devam Et</button>
+    </div>
+</mat-card>

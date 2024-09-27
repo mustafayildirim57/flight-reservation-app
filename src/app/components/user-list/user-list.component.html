@@ -1,0 +1,9 @@
+<mat-card>
+    <mat-card-title>Kullanıcılar</mat-card-title>
+    <ul>
+      <li *ngFor="let user of users">
+        {{ user.firstName }} {{ user.lastName }} - {{ user.email }}
+      </li>
+    </ul>
+  </mat-card>
+  

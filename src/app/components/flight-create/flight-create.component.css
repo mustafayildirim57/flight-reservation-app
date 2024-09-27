@@ -1,0 +1,26 @@
+.loginCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+  }
+  
+  .matCardSize {
+    min-width: 40%;
+  }
+  
+  .inputRow {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .inputRow mat-form-field {
+    width: 48%;
+  }
+  
+  .loginFootbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+  

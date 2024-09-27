@@ -1,0 +1,27 @@
+.reservationCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+  }
+  
+  .matCardSize {
+    min-width: 50%; /* Genişliği artırdım */
+    padding: 20px;  /* Kenar boşlukları için padding ekledim */
+  }
+  
+  .inputRow {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .inputRow mat-form-field {
+    width: 48%;  /* İki input yan yana olacak şekilde genişlik ayarladım */
+  }
+  
+  .reservationFootbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+  
